@@ -6,7 +6,7 @@ CARDS = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 
 
 def main():
-    if input("Do you want to play a game of Blackjack? Type 'y' or 'n': ") == 'y':
+    while input("Do you want to play a game of Blackjack? Type 'y' or 'n': ") == 'y':
         clean()
         print(logo)
         player_cards = add_card(CARDS, 2)
@@ -23,9 +23,7 @@ def main():
         while player_score < 21:
             if input("Type 'y' to get another card, type 'n' to pass: ") == 'y':
                 player_cards.extend(add_card(CARDS))
-                print(player_cards)
                 player_score = calculate_score(player_cards)
-                print(player_cards)
                 print(
                     f"    Your cards: {player_cards}, current score: {player_score}")
                 print(
@@ -39,46 +37,8 @@ def main():
 
         print_final_result(player_cards, player_score,
                            computer_cards, computer_score)
-
-        # if computer_score > 21:
-        #     print(
-        #         f"    Your final hand: {player_cards}, final score: {player_score}")
-        #     print(
-        #         f"    Computer's final hand: {computer_cards}, final score: {computer_score}")
-
-        #     print("Opponent went over. You win.")
-
-        # elif player_score > 21:
-        #     print(
-        #         f"    Your final hand: {player_cards}, final score: {player_score}")
-        #     print(
-        #         f"    Computer's final hand: {computer_cards}, final score: {computer_score}")
-
-        #     print("You went over. You lose.")
-
-        # elif computer_score < player_score:
-        #     print(
-        #         f"    Your final hand: {player_cards}, final score: {player_score}")
-        #     print(
-        #         f"    Computer's final hand: {computer_cards}, final score: {computer_score}")
-
-        #     print("You win.")
-
-        # elif computer_score > player_score:
-        #     print(
-        #         f"    Your final hand: {player_cards}, final score: {player_score}")
-        #     print(
-        #         f"    Computer's final hand: {computer_cards}, final score: {computer_score}")
-
-        #     print("You lose.")
-
-        # else:
-        #     print(
-        #         f"    Your final hand: {player_cards}, final score: {player_score}")
-        #     print(
-        #         f"    Computer's final hand: {computer_cards}, final score: {computer_score}")
-
-        #     print("It's a draw.")
+    # Clear screen and return to terminal
+    clean()
 
 
 def add_card(cards, n=1):
@@ -104,22 +64,25 @@ def calculate_score(scores):
 
 
 def print_final_result(player_cards, player_score, computer_cards, computer_score):
-
     print(
         f"    Your final hand: {player_cards}, final score: {player_score}")
     print(
         f"    Computer's final hand: {computer_cards}, final score: {computer_score}")
 
     if player_score > 21:
-        print("You went over. You lose.")
+        print("You went over. You lose.\U0001F62D")
+    elif player_score == 21:
+        print("You got Blackjack. You win.\U0001F929")
     elif computer_score > 21:
-        print("Opponent went over. You win.")
+        print("Opponent went over. You win.\U0001F601")
+    elif computer_score == 21:
+        print("Opponent got Blackjack. You lose.\U0001F62D")
     elif computer_score < player_score:
-        print("You win.")
+        print("You win.\U0001F601")
     elif computer_score > player_score:
-        print("You lose.")
+        print("You lose.\U0001F62D")
     else:
-        print("Draw.")
+        print("Draw.\U0001F641")
 
 
 def clean():
