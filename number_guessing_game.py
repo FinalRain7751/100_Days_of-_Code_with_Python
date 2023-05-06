@@ -4,7 +4,7 @@ from random import randint
 from art import LOGO
 
 # Generating a random number between 1 and 100 (both included)
-NUMBER = randint(1, 101)
+NUMBER = randint(1, 100)
 
 
 def main():
