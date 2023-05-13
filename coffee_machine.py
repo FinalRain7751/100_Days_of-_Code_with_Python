@@ -46,10 +46,12 @@ def main():
 
         # If money adequate, give coffee
         else:
-            # If money more than the cost of coffee
+            # If money given is more than the cost of coffee, return the change
             if money > cost:
                 print(f"Here is ${round((money - cost), 2)} in change.")
+            # Update the resources in the machine
             update_resources(user_input)
+            # Serve the coffee!
             print(f"Here is your {user_input}. Enjoy!")
 
     # Get ready for the next user
@@ -83,7 +85,7 @@ def is_sufficient(coffee_type: str) -> list:
 
 
 def print_insufficient(insufficient: list[str]) -> None:
-    """Given a list of missing items prints a formatted string informing about the same.
+    """Given a list of missing items, prints a formatted string informing about the same.
 
     Args:
         insufficient (list[str]): List of missing items
@@ -109,15 +111,34 @@ def ask_for_money() -> float:
         float: Total value of coins inserted in dollars
     """
     print("Please insert coins.")
-    quarters = int(input("How many quarters? "))
-    dimes = int(input("How many dimes? "))
-    nickles = int(input("How many nickles? "))
-    pennies = int(input("How many pennies? "))
+
+    quarters = ask_coins('quarters')
+    dimes = ask_coins('dimes')
+    nickles = ask_coins('nickles')
+    pennies = ask_coins('pennies')
 
     total_in_dollars = round((quarters * 0.25 + dimes * 0.10 +
                               nickles * 0.05 + pennies * 0.01), 2)
 
     return total_in_dollars
+
+
+def ask_coins(coins: str) -> int:
+    """Asks the user to enter the number of coins of a particular type and returns the same
+
+    Args:
+        coins (str): Type of coin to insert
+
+    Returns:
+        int: Number of coins 
+    """
+    while True:
+        try:
+            coin = int(input(f"How many {coins}? "))
+            return coin
+        except ValueError:
+            print("Enter a valid number of coins.")
+            continue
 
 
 def update_resources(coffee_type: str) -> None:
