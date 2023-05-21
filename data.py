@@ -21,8 +21,8 @@ class Question_bank:
                    'type': 'boolean', 'token': token}
         while True:
             response = requests.get(
-                "https://opentdb.com/api.php", params=payload).json()
-            if response['response_code'] != 0:
+                "https://opentdb.com/api.php", params=payload, timeout=5).json()
+            if not response or response['response_code'] != 0:
                 token = self.request_session_token()
             else:
                 return response['results']
