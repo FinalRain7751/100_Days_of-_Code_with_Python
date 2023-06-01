@@ -1,4 +1,6 @@
 from turtle import Turtle
+from screen import HEIGHT
+from random import randint
 
 
 class Ball(Turtle):
@@ -10,5 +12,14 @@ class Ball(Turtle):
         self.color("white")
         self.penup()
         
+    def ball_starts_moving(self):
+        self.setheading(270)
+        self.fd(2)
     
+    def ball_set_initial_direction(self):     
+        self.setheading(randint(135, 180))
+        
+        
+    def ball_moving(self):
+        self.fd(2)
         
