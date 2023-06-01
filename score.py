@@ -42,5 +42,4 @@ class Scoreboard(Turtle):
             self.fd(20)
             self.penup()
             self.fd(20)
-        # self.width()
     

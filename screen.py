@@ -1,4 +1,4 @@
-from turtle import Turtle, Screen
+from turtle import Screen
 
 WIDTH = 1000
 HEIGHT = 600
