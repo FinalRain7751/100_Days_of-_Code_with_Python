@@ -3,7 +3,8 @@ from screen import HEIGHT, WIDTH
 
 ALIGN = "center"
 FONT = ("Courier", 40, 'bold')    
-FONT_NAMES = ("Courier", 30, 'bold')    
+FONT_NAMES = ("Courier", 30, 'bold')   
+INCREASE_SPEED_AFTER = 2 
     
 class Scoreboard(Turtle):
     def __init__(self):
@@ -29,9 +30,6 @@ class Scoreboard(Turtle):
         self.goto(80, HEIGHT/2 - 60)
         self.write(self.cpu_score, align=ALIGN, font=FONT)
 
-    def update_score(self):
-        self.clear()
-        self.write_score()
 
     def draw_net(self):
         self.goto(0, HEIGHT/2 - 5)
@@ -43,3 +41,14 @@ class Scoreboard(Turtle):
             self.penup()
             self.fd(20)
     
+    def update_score(self):
+        self.clear()
+        self.write_player_names()
+        self.write_score()
+        self.draw_net()
+
+    def ball_increase_speed(self, score):
+        scores = range(INCREASE_SPEED_AFTER, 1000, INCREASE_SPEED_AFTER)
+        if score in scores:
+            return True
+        return False
