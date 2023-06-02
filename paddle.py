@@ -5,6 +5,7 @@ from screen import HEIGHT, WIDTH
 
 MAX_Y = HEIGHT/2 - 20  
 MIN_Y = -(HEIGHT/2 -20)
+PADDLE_UNITS = 5
 
 class Paddle():
     def __init__(self):
@@ -19,13 +20,13 @@ class Paddle():
         else:
             x = WIDTH/2 - 25
 
-        for i in range(3):
+        for i in range(PADDLE_UNITS):
             paddle_unit = Turtle()
             paddle_unit.resizemode("user")
             paddle_unit.shape("square")
             paddle_unit.color("white")
             paddle_unit.penup()
-            paddle_unit.goto(x, 20-i*20)
+            paddle_unit.goto(x, (20*(PADDLE_UNITS-1)/2)-i*20)
 
             if user == "player":
                 self.player_paddles.append(paddle_unit)
@@ -82,7 +83,7 @@ class Paddle():
 
             if -5 > paddle_ycor - ball_projected_ycor > 5:
                 for i in range(3):
-                    self.cpu_paddles[i].goto(WIDTH/2 - 25, ball_projected_ycor+20-i*20)
+                    self.cpu_paddles[i].goto(WIDTH/2 - 25, ball_projected_ycor+(20*(PADDLE_UNITS-1)/2)-i*20)
             elif ball_projected_ycor > paddle_ycor:
                 self.move_cpu_paddle_up()
             elif ball_projected_ycor < paddle_ycor:
@@ -91,7 +92,7 @@ class Paddle():
         else:
             if -5 > paddle_ycor > 5:
                 for i in range(3):
-                    self.cpu_paddles[i].goto(WIDTH/2 - 25, 20-i*20)
+                    self.cpu_paddles[i].goto(WIDTH/2 - 25, (20*(PADDLE_UNITS-1)/2)-i*20)
             elif paddle_ycor < 0:
                 self.move_cpu_paddle_up()
             elif paddle_ycor > 0:
