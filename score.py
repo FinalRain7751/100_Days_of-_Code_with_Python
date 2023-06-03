@@ -7,10 +7,14 @@ FONT_NAMES = ("Courier", 30, 'bold')
 INCREASE_SPEED_AFTER = 2 
     
 class Scoreboard(Turtle):
-    def __init__(self):
+    def __init__(self, number_of_players):
         super().__init__()
-        self.player_score = 0
-        self.cpu_score = 0
+        self.number_of_players = number_of_players
+        self.player1_score = 0
+        if self.number_of_players == 2:
+            self.player2_score = 0
+        elif self.number_of_players == 1:
+            self.cpu_score = 0
         self.hideturtle()
         self.color("white")
         self.penup()
@@ -20,16 +24,21 @@ class Scoreboard(Turtle):
     
     def write_player_names(self):
         self.goto(-WIDTH/4, HEIGHT/2 - 50)
-        self.write("PLAYER", align=ALIGN, font=FONT_NAMES)
+        self.write("PLAYER 1", align=ALIGN, font=FONT_NAMES)
         self.goto(WIDTH/4, HEIGHT/2 - 50)
-        self.write("CPU", align=ALIGN, font=FONT_NAMES)
+        if self.number_of_players == 1:
+            self.write("CPU", align=ALIGN, font=FONT_NAMES)
+        elif self.number_of_players == 2:
+            self.write("PLAYER 2", align=ALIGN, font=FONT_NAMES)
 
     def write_score(self):
         self.goto(-80, HEIGHT/2 - 60)
-        self.write(self.player_score, align=ALIGN, font=FONT)
+        self.write(self.player1_score, align=ALIGN, font=FONT)
         self.goto(80, HEIGHT/2 - 60)
-        self.write(self.cpu_score, align=ALIGN, font=FONT)
-
+        if self.number_of_players == 2:
+            self.write(self.player2_score, align=ALIGN, font=FONT)
+        elif self.number_of_players == 1:
+            self.write(self.cpu_score, align=ALIGN, font=FONT)
 
     def draw_net(self):
         self.goto(0, HEIGHT/2 - 5)
@@ -47,8 +56,3 @@ class Scoreboard(Turtle):
         self.write_score()
         self.draw_net()
 
-    def ball_increase_speed(self, score):
-        scores = range(INCREASE_SPEED_AFTER, 1000, INCREASE_SPEED_AFTER)
-        if score in scores:
-            return True
-        return False
